@@ -1,0 +1,8 @@
+non ci interessa porta locale del client
+
+thread.sleep qual è il problema? in quei 10 secondi il client blocca il sistema
+thread posso avere accesso alle stesse variabili
+java no ereditarietà multipla quindi con implementrs siamo più liberi
+
+
+
