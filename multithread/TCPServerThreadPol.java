@@ -23,29 +23,45 @@ public class TCPServerThreadPol extends Thread {
     }
 
     public void run() {
-        System.out.println("thread");
-
-        String clientSentence;
-        String capitalizedSentence;
-        //int[] a={0,0};
-        int a1, a2;
+        String[] a={"a", "a"};
+        int[] num={0,0};
+        boolean ch=true;
+        String operator;
         try {
-        //for(int i=1; i<3; i++) {
-            clientSentence = inFromClient.readLine();
-            outToClient.writeBytes("ok\n");
-            a1=Integer.parseInt(clientSentence);
-            System.out.println(a1);
+            for(int i=1; i<=2; i++) {
+                do {
+                    outToClient.writeBytes("Inserisci cifra " + i + "\n");
+                    a[i - 1] = inFromClient.readLine();
+                    try {
+                        System.out.println(ch);
+                        num[i - 1] = Integer.parseInt(a[i - 1]);
+                        System.out.println(ch);
+                        ch = false;
+                        System.out.println(ch);
+                        outToClient.writeBytes("ok\n");
+                    } catch (NumberFormatException e) {
+                        //outToClient.writeBytes("Valore errato");
+                        System.out.println("valore errato");
+                        continue;
+                    }
 
-            clientSentence = inFromClient.readLine();
-            outToClient.writeBytes("ok\n");
-            a2=Integer.parseInt(clientSentence);
-            System.out.println(a2);
+                } while (ch);
+            }
+            int result=0;
+             operator=inFromClient.readLine();
+             switch(operator){
+                 case "+": result=(num[0]+num[1]);
+                 break;
+                 case "-": result=(num[0]-num[1]);
+                 break;
+                 case "*": result=(num[0]*num[1]);
+                 break;
+                 case "/": result=(num[0]/num[1]);
+                 break;
+            }
 
-        //}
-            Integer b=(a1+a2);
-            capitalizedSentence = b.toString()+ '\n';
 
-            outToClient.writeBytes(capitalizedSentence);
+            outToClient.writeBytes(result+"\n");
 
             connectionSocket.close();
 

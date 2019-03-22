@@ -10,8 +10,6 @@ class TCPMultiServerPol {
         while(true) {
             Socket connectionSocket = welcomeSocket.accept();
 
-            System.out.println("accettato");
-
             /* Creazione di un thread e passaggio della established socket */
             TCPServerThreadPol theThread =
                     new TCPServerThreadPol(connectionSocket);

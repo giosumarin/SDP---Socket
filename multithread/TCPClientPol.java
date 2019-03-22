@@ -24,25 +24,28 @@ public class TCPClientPol {
                 new BufferedReader(new
                         InputStreamReader(clientSocket.getInputStream()));
     do {
+        System.out.println(inFromServer.readLine());
         /* Legge una linea da tastiera */
         sentence = inFromUser.readLine();
 
         /* Invia la linea al server */
         outToServer.writeBytes(sentence + '\n');
         checkServer=inFromServer.readLine();
-        System.out.println(checkServer);
-/*
-        sentence = inFromUser.readLine();
-        outToServer.writeBytes(sentence + '\n');
-        System.out.println(inFromServer.readLine());
-*/
+        //System.out.println(checkServer);
+
         if(checkServer.equals("ok")) {
-            System.out.println("nell'if");
             check++;
         }
 
     }while(check!=2);
+        /* leggo il segno da tastiera */
+
+        sentence = inFromUser.readLine();
+
+        outToServer.writeBytes(sentence + '\n');
+
         /* Legge la risposta inviata dal server (linea terminata da \n) */
+
         modifiedSentence = inFromServer.readLine();
 
         System.out.println("FROM SERVER: " + modifiedSentence);
