@@ -31,18 +31,25 @@ public class TCPClientPol {
         /* Invia la linea al server */
         outToServer.writeBytes(sentence + '\n');
         checkServer=inFromServer.readLine();
-        //System.out.println(checkServer);
 
         if(checkServer.equals("ok")) {
             check++;
         }
 
+        System.out.println(checkServer);
     }while(check!=2);
+    check=0;
+    String checkOp;
+    do {
         /* leggo il segno da tastiera */
-
+        System.out.println(inFromServer.readLine());
         sentence = inFromUser.readLine();
-
         outToServer.writeBytes(sentence + '\n');
+        checkOp=inFromServer.readLine();
+        System.out.println(checkOp);
+        if(checkOp.equals("ok")) check++;
+    }while (check==0);
+
 
         /* Legge la risposta inviata dal server (linea terminata da \n) */
 
